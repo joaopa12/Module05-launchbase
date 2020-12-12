@@ -4,8 +4,14 @@ const { age, date } = require("../../lib/utils")
 module.exports = {
     all(callback) {
 
-        db.query(`SELECT * FROM instructors`, function (err, results) {
-            if (err) throw `Database Error ${err}`   
+        db.query(`
+        SELECT instructors.*, count(members) AS total_students
+        FROM instructors
+        LEFT JOIN members ON (members.instructor_id = instructors.id)
+        GROUP BY instructors.id
+        ORDER BY total_students DESC
+        `, function (err, results) {
+            if (err) throw `Database Error ${err}`
 
             callback(results.rows)
         })
@@ -31,18 +37,18 @@ module.exports = {
             date(Date.now()).iso
         ]
         db.query(query, values, function (err, results) {
-            if (err) throw `Database Error ${err}`   
+            if (err) throw `Database Error ${err}`
 
             callback(results.rows[0])
         })
     },
-    find(id, callback){
-           db.query(`SELECT * FROM instructors WHERE id = $1`, [id], function(err, results){
-            if (err) throw `Database Error ${err}`   
+    find(id, callback) {
+        db.query(`SELECT * FROM instructors WHERE id = $1`, [id], function (err, results) {
+            if (err) throw `Database Error ${err}`
             callback(results.rows[0])
         })
     },
-    update(data, callback){
+    update(data, callback) {
         const query = `
         UPDATE instructors SET
         avatar_url=($1),
@@ -61,15 +67,15 @@ module.exports = {
             data.id
         ]
 
-        db.query(query, values, function(err, results){
-            if (err) throw `Database Error ${err}`    
+        db.query(query, values, function (err, results) {
+            if (err) throw `Database Error ${err}`
 
             callback()
-        }) 
+        })
     },
-    delete(id, callback){
-        db.query(`DELETE FROM instructors WHERE id = $1`, [id], function(err, results){
-            if (err) throw `Database Error ${err}`    
+    delete(id, callback) {
+        db.query(`DELETE FROM instructors WHERE id = $1`, [id], function (err, results) {
+            if (err) throw `Database Error ${err}`
 
             return callback()
         })
