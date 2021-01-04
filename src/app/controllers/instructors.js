@@ -1,6 +1,5 @@
 const Intl = require('intl')
 const { age, date } = require("../../lib/utils")
-const instructor = require('../models/instructor')
 const Instructor = require('../models/instructor')
 
 module.exports = {
