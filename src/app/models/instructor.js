@@ -106,7 +106,6 @@ module.exports = {
             ) AS total`
 
         if (filter) {
-
             filterQuery = `${query}
             WHERE instructors.name ILIKE '%${filter}%'
             OR instructors.services ILIKE '%${filter}%'
