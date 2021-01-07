@@ -113,8 +113,8 @@ module.exports = {
 
             totalQuery = `(
                 SELECT count(*) FROM instructors
-                ${filterQuery} AS total
-            )`
+                ${filterQuery} 
+            ) as total`
         }
 
         query = `
