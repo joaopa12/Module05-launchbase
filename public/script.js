@@ -27,7 +27,7 @@ function paginate(selectedPage, totalPages) {
                if (oldPage && currentPage - oldPage > 2) {
                     pages.push("...")
                }
-               if (oldPage && currentPage - oldPage == 3) {
+               if (oldPage && currentPage - oldPage == 2) {
                     pages.push(currentPage - 1)
                }
 
