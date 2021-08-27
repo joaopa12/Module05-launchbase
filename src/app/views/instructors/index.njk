@@ -11,7 +11,7 @@
          <button type="submit">Filtrar</button>
          </form>
       </div>
-      <table width="100%">
+      <table>
          <thead>
             <tr>
                <th>Instructor</th>
@@ -27,7 +27,8 @@
 
                   <td>
                      <span style="background-image: url({{ instructor.avatar_url }})"></span>
-                     {{ instructor.name}}</td>
+                     <p>{{ instructor.name}}</p>
+                  </td>
                   <td>{{ instructor.services }}</td>
                   <td>{{ instructor.total_students }}</td>
                   <td>
